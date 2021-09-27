@@ -1,0 +1,162 @@
+.players-card {
+    height: 300px;
+    width: 98%;
+    /* background-color: blue; */
+    /* opacity: 30%; */
+    border: solid rgb(92, 92, 255) 1px;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    
+}
+
+.invite-link-baner {
+    height: 30px;
+    width: 100%;
+    background-color: rgb(58, 255, 74);
+    line-height: 30px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    font-size: 70%;
+}
+
+.invite-link {
+    height: 30px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    line-height: 30px;
+    font-size: 1rem;
+}
+
+.btn-copy {
+    height: 30px;
+    font-size: 1.2rem;
+    width: 75%;
+    background-color: rgb(255, 255, 255);
+    line-height: 30px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.btn-copy:hover {
+    color: rgb(184, 184, 184);
+    cursor: pointer;
+}
+
+.btn-copied {
+    height: 30px;
+    width: 75%;
+    background-color: rgb(255, 255, 255);
+    line-height: 30px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: rgb(184, 184, 184);
+    cursor: pointer;
+}
+
+.copy {
+    color: rgb(0, 255, 34);
+    font-weight: bold;
+    margin-left: -50%;
+}
+
+.stngs-str {
+    margin-top: 20px;
+    color: white;
+    margin-right: 20%;
+    font-size: x-large;
+    font-weight: bolder;
+    border: 1px white solid;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.settings {
+    margin-top: 10px;
+    width: 90%;
+    height: 70%;
+    background-color: rgb(238, 241, 255);
+    text-align: left;
+    padding-left: 15px;
+    padding-top: 10px;
+}
+
+.btn-start {
+
+    margin-top: 115px;
+    height: 25%;
+    width: 80%;
+    line-height: 40px;
+    background-color: rgb(34, 192, 3);
+    color: white;
+    font-weight: bold;
+    border-right-style: groove;
+    border-top-right-radius: 700px;
+    border-bottom-right-radius: 700px;
+}
+
+.btn-start:hover {
+    cursor: pointer;
+    background-color: rgb(30, 172, 2);
+}
+
+.btn-disabled{
+
+    margin-top: 125px;
+    height: 25%;
+    width: 80%;
+    line-height: 40px;
+    /* background-color: rgb(34, 192, 3); */
+    /* color: white; */
+    font-weight: bold;
+    border-right-style: groove;
+    border-top-right-radius: 700px;
+    border-bottom-right-radius: 700px;
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    cursor: no-drop;
+}
+
+.public-opening {
+    font-size: large;
+    font-weight: bold;
+    margin-top: 40px;
+}
+
+.public-opening input {
+    width: 20px;
+    height: 20px;
+}
+
+.player-template {
+    height: 80;
+    width: 80px;
+    padding: 2%;
+}
+
+.player-avatar {
+    height: 80px;
+    width: 80px;
+    background-color: rgb(235, 140, 17);
+    border-radius: 100px;
+    line-height: 100px;
+    opacity: 100%;
+}
+
+.player-name {
+    color: rgb(250, 249, 211);
+    font-weight: bold;
+}
+
+.rounds select{
+    width: 50%;
+}
+
+@media only screen and (max-width: 800px) {
+    .invite-link {
+        font-size: 0.8rem;
+    }
+    
+}

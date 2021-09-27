@@ -1,0 +1,11 @@
+.App {
+  height: 1200px;
+  background-size: 350px;
+  text-align: center;
+  background-image: url('./assets/images/bg2.jpg');
+  /* background-image: url('https://i.imgur.com/cc1TZSQ.gif'); */
+  padding: 0px;
+  margin: 0px;
+}
+
+

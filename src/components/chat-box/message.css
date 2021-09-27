@@ -1,0 +1,14 @@
+.msg-card {
+    text-align: left;
+    padding: 4px;
+}
+.blue {
+    background-color: rgb(215, 222, 224);
+}
+.white {
+    background-color: rgb(255, 254, 254);
+}
+.right-ans {
+    color: rgb(5, 155, 5);
+    font-weight: bold;
+}

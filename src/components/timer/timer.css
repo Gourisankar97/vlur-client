@@ -1,0 +1,20 @@
+.clock-circle {
+    /* border: rgb(65, 59, 59) 1px solid; */
+    width: 75px;
+    height: 80px;
+    padding: 7px;
+    background: url('../../assets/images/clock.png');
+    display: block;
+    background-size: cover;
+    line-height: 40px;
+    /* text-align: center; */
+}
+.space {
+    margin-top: 34%;
+    margin-left: 25%;
+    height: 43px;
+    width: 43px;
+    border-radius: 40px;
+    background-color: rgb(255, 255, 251);
+    font-size: 30px;
+}
