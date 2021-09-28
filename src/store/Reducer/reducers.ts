@@ -78,7 +78,7 @@ export const messageList = (state = [], action: any) => {
 export const game = (state = [], action: any) => {
       switch (action.type) {
             case 'SET_GAME':
-                  state = state.concat(action.game);
+                  state = action.game;
                   return state;
 
             default:

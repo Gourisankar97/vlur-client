@@ -3,7 +3,7 @@ import './room.css';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import io from 'socket.io-client';
-import { serviceUrl } from "../../env";
+import { clientUrl, serviceUrl } from "../../env";
 import { CopyIcon } from "@patternfly/react-icons";
 
 const socket = io(serviceUrl, {
@@ -19,7 +19,7 @@ export const Room = () => {
     const roomId =  useSelector((state:any)=>state.roomLink);
     const user = useSelector((state:any)=> state.user);
 
-    const generatedLink =   'http://localhost:3000/?'+roomId;
+    const generatedLink =   clientUrl+'/?'+roomId;
     const players = useSelector((state:any) => state.players);
     
 

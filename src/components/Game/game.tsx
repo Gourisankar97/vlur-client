@@ -8,7 +8,7 @@ import second from '../../assets/images/second.png';
 import third from '../../assets/images/third.png';
 import sound from '../../assets/images/sound.png';
 import mute from '../../assets/images/mute.png'
-import { serviceUrl } from "../../env";
+import { serviceUrl, inProduction, clientUrl } from "../../env";
 import { UserPlusIcon } from "@patternfly/react-icons";
 import HashMap from 'hashmap';
 
@@ -53,6 +53,7 @@ const Game = () => {
 
     const [playersBackup, setPlayersBackup] = useState([]);
     const [totalPlayerAnswered, setTotalPlayerAnswered] = useState(0);
+    const [isAdmin, setIsAdmin] = useState(false);
     var [skipRound, setSkipRound] = useState(false);
 
 
@@ -63,7 +64,7 @@ const Game = () => {
     const joinAudio = new Audio(`sounds/join.mp3`);
     const disconnectAudio = new Audio(`sounds/right_answer.mp3`);
 
-    const generatedLink =   'http://localhost:3000/?'+roomId;
+    const generatedLink =   clientUrl+'/?'+roomId;
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(generatedLink);
@@ -73,11 +74,10 @@ const Game = () => {
 
     const HandleSubmit = (e: any) => {
         e.preventDefault();
-        console.log("&&&&&&&&___+++++++++=======>  : "+e.target.msg.value);
         let text = e.target.msg.value;
         if(!text.trim()) return;
         
-        
+        text = text.trim();
         chat(text.toLowerCase());
         message = '';
         setMessage(message);
@@ -94,34 +94,22 @@ const Game = () => {
      * ROOM JOINING STUFF
      */
 
+    useEffect( ()=> {
+        setIsAdmin((state)=>{
+            return user.isAdmin;
+        })
+    }, []);
+
+    useEffect(()=> {
+        setIsAdmin((state)=>{
+            return user.isAdmin;
+        });
+    },[user]);
+
     useEffect(()=> {
 
         messageList = chats;
         setMessageList(messageList);
-
-        socket.on('connect', function () {
-          console.log("CONNECTED");
-          socket.emit('join', {roomId: roomId });
-        });
-      
-        socket.on("message", function(data) {
-          console.log("MESSAGE FROM WEBSOCKET : "+data.msg );
-        });
-
-        socket.on("join-room", function(data) {
-
-
-            if(data && data.players) {
-                dispatcher({type:'SET_PLAYERS', players: data.players});
-            }
-            
-          });
-
-        socket.on("room-chat", function(data) {
-            messageList = chats;
-            setMessageList(messageList);
-        });
-
         showPic();
       },[]);
 
@@ -155,13 +143,12 @@ const Game = () => {
         players.map( async (player: any) => {
 
             if(player.isAdmin && player.playerId === user.playerId) {
-                dispatcher({type:'SET_USER', name: user.name, playerId: user.playerId, score: player.score, avatar:  user.avatar, isAdmin: true});
+                await dispatcher({type:'SET_USER', name: user.name, playerId: user.playerId, score: player.score, avatar:  user.avatar, isAdmin: true});
             }
             if(pMap.has(player.playerId)) {
                 
                 
                 let oldScore = pMap.get(player.playerId);
-                console.log("OLD SCORE : "+oldScore+"    NEW SCORE : "+player.score);
                 if(oldScore !== undefined && oldScore < player.score)
                 {
                     setTotalPlayerAnswered( (state)=> {
@@ -192,7 +179,7 @@ const Game = () => {
             let point = time*5;
             await socket.emit("update-score", {roomId:roomId, playerId: user.playerId, points: point});
         }
-        console.log("ROOMID :" + roomId );
+        if(!inProduction) console.log("ROOMID :" + roomId );
         
         if(user)
             await socket.emit("chat", {roomId:roomId, from: user.name, playerId:user.playerId, content: text});
@@ -212,7 +199,7 @@ const Game = () => {
     }
 
 
-    const syncRound = async (sup: number, sub: number) => {
+    const syncRound = async (sup: number, sub: number) => {        
         await socket.emit("update-round", {roomId: roomId, currentRound: {sup: sup, sub: sub}});
     }
 
@@ -221,7 +208,7 @@ const Game = () => {
         setHideRoundShutter(prevState => !prevState);
         await wait(3000);
         setRoundShutter(prevState => !prevState);
-        await wait(3000);
+        await wait(2700);
         setHideRoundShutter(prevState => !prevState);
     }
 
@@ -241,7 +228,12 @@ const Game = () => {
                     for(let j = currentRound_sub; j<= r.length; j++) {
                         setBlur(true);
                         setAnsGiven(false);
-                        if(user.isAdmin) await syncRound(i,j);
+                        setIsAdmin(  (state )=> {
+                            if(state) {
+                                syncRound(i,j);
+                            }
+                            return user.isAdmin;
+                        });
 
                         setRound(i+'.'+j);
                         setShutterRound(i);
@@ -263,8 +255,6 @@ const Game = () => {
 
 
                                 if(x) {
-                                    console.log('SKIPPING');
-                                    
                                     setTime(0);
                                     break;
                                 }
@@ -288,12 +278,9 @@ const Game = () => {
 
 
                                 if(x) {
-                                    console.log('SKIPPING');
-                                    
                                     setTime(0);
                                     break;
                                 }
-                                console.log('skipRound : '+skipRound);
                                 setTime(k);
                                 await wait(1000);
                             }
@@ -389,8 +376,7 @@ const Game = () => {
                 : <div>
                 
                 <div className={"main-screen"} >
-                    <img src={currentPic} onLoad={()=>console.log("IMAGE LOADED")}   className={toggleBlur ? "image-blur" : "image-clear"} alt="logo"/>
-                    {/* <img src={'https://lh3.googleusercontent.com/l1VOxbA4SDQ50J1nhjmo2q43U1mWUXfQ3iTHCycOmHH7VjSCdCew9rEiUDPmkwT2LOKpVqYEhDBYdQ1-sV7QMmSWdg7H5_OAy2_jjPPKapddf3_XvI8B7azdqxGYrESJsbDeOMVuoKCba-JFOyxeynf8jCTuDaTPNFQ0yx3OZPTu8L2DDSGE9UYoU4yrUtXQk0pt3et2Jwt-o4-ONzuivHSIVcSUQRWtbbrsBPZ5GjQNR6xA8Lma9nghdWquwF5ti4_Ct5Drfqg6I0Kjdgn9JPeTT7FOqLoAjA3mxiIE5EfNhu56kaN5P_wqJHazr8qex85nngwIDLsayx8aQ_BoQAo1hFJuI3ZS9hxQbkCZbI4GwUpIR4tw8wQxGpk9FwHYjvK1mEvyTj65gbU3o3_9TtqobyZIVMUiONh5PIYLqDBl9Al4X_ehXpbCh9cunq5JrWDJjaELyx493KWjWMdjStCeOZLMXk1D26VOdehORDgFInSHFeqN3HYCjJT5LK0X3Bes26QWt60NURKfLmL3y8Es-E0AY9KQDGHXFijWMBMms5L68belboP1uGPSr7IWOHSlFXwfYxqBPGE-cAgb2YtTYjVBXU1kWphkqvJeHoyq6oqbb2gl3_rxOIyCfjEnYz-Ld__NaXnsr_IaoH76Bqii5C02rt80QsONDAIODGLSgbBrJI3mcCwv-k60bTSOXXrKPCJlLYsSYQu_X2bQqT3D=w348-h528-no?authuser=0'} onLoad={()=>console.log("IMAGE LOADED")}   className={toggleBlur ? "image-blur" : "image-clear"} alt="logo"/> */}
+                    <img src={currentPic} onLoad={()=>{ if(!inProduction) console.log("IMAGE LOADED") }}   className={toggleBlur ? "image-blur" : "image-clear"} alt="logo"/>
                 </div>
                 
 
@@ -407,8 +393,7 @@ const Game = () => {
                 </div>
 
                 <br></br>
-                <br></br>
-                <br></br>
+
                 <div className={"hint-div"}>
                 <i className="icon-lightbulb"></i> Hint: {hint}
                 </div>
