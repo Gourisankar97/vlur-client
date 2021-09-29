@@ -43,6 +43,9 @@ function App() {
     <div className="App">
         <Helmet>
           <title>vlur.online : Free Multiplayer fun Image Guessing game</title>
+          <head>
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1497341032155334" crossOrigin="anonymous"></script>
+          </head>
           <meta name="description" content="vlur online is a free multiplayer image guessing game. Invite friends or join random rooms and Guess the image name with your friends and people all around the world!" />
           <meta name="keywords" content="vlur online, vlur.online, image guessing game, game, multiplayer, guessing, play with friends,  game for kids, kids play"/>
         </Helmet>

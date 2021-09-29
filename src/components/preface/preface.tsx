@@ -1,5 +1,6 @@
 import { Grid, GridItem, AboutModal, TextContent, TextList, TextListItem } from '@patternfly/react-core';
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import GameCard from './gameCard/GameCard';
 import './preface.css'
 
@@ -21,6 +22,11 @@ const Preface =  (props: any) => {
 
     return(
         <>
+            <Helmet>
+            <head>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1497341032155334" crossOrigin="anonymous"></script>
+            </head>
+            </Helmet>
             <GameCard></GameCard>
 
         <div className={"modal"}>

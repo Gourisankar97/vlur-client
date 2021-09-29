@@ -12,6 +12,7 @@ import { serviceUrl, inProduction, clientUrl } from "../../env";
 import { UserPlusIcon } from "@patternfly/react-icons";
 import HashMap from 'hashmap';
 import { ansSound, disconnectSound, joiningSound } from "./gmaeSound";
+import { Helmet } from "react-helmet";
 
 
 const socket = io(serviceUrl, {
@@ -318,6 +319,12 @@ const Game = () => {
     
     return( 
         <>
+        <Helmet>
+          <head>
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1497341032155334" crossOrigin="anonymous"></script>
+          </head>
+        </Helmet>
+
          <Grid>
                 <GridItem span={4}><img src={enableAudio ? sound : mute} className={"sound-icon"} onClick={()=>toggleAudio()} alt={"sound"} ></img></GridItem>
                 <GridItem span={4}></GridItem>

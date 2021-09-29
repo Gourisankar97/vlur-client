@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import io from 'socket.io-client';
 import { clientUrl, serviceUrl } from "../../env";
 import { CopyIcon } from "@patternfly/react-icons";
+import { Helmet } from "react-helmet";
 
 const socket = io(serviceUrl, {
     upgrade: false, transports: ['websocket']
@@ -46,6 +47,12 @@ export const Room = () => {
 
     return(
         <>
+          <Helmet>
+          <head>
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1497341032155334" crossOrigin="anonymous"></script>
+          </head>
+        </Helmet>
+        
             <Grid>
 
                 <GridItem span={2}></GridItem>
