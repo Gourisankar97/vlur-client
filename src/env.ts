@@ -4,4 +4,4 @@ export const serviceUrl = 'http://unchat.online';
 export const clientUrl = 'http://vlur.online';
 // export const clientUrl = 'http://localhost:3000';
 
-export const inProduction = false;
+export const inProduction = true;

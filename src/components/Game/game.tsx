@@ -11,6 +11,7 @@ import mute from '../../assets/images/mute.png'
 import { serviceUrl, inProduction, clientUrl } from "../../env";
 import { UserPlusIcon } from "@patternfly/react-icons";
 import HashMap from 'hashmap';
+import { ansSound, disconnectSound, joiningSound } from "./gmaeSound";
 
 
 const socket = io(serviceUrl, {
@@ -58,9 +59,7 @@ const Game = () => {
     const wait = (seconds: number) => new Promise(res=> setTimeout(res, seconds)); 
     const dispatcher = useDispatch();
 
-    const ansAudio = new Audio(`sounds/correct.mp3`);
-    const joinAudio = new Audio(`sounds/join.mp3`);
-    const disconnectAudio = new Audio(`sounds/right_answer.mp3`);
+    
 
     const generatedLink =   clientUrl+'/?'+roomId;
 
@@ -113,7 +112,7 @@ const Game = () => {
 
       useEffect(()=>{
             messageList = chats;
-            if(messageList && messageList[messageList.length-1] && messageList[messageList.length-1].message === ans)  ansSound();
+            if(messageList && messageList[messageList.length-1] && messageList[messageList.length-1].message === ans)  ansSound(enableAudio);
             setMessageList(messageList);
             
             
@@ -124,11 +123,11 @@ const Game = () => {
 
         if(players.length < playerCount) {
             setPlayerCount(players.length);
-            disconnectSound();
+            disconnectSound(enableAudio);
         }
         else if(players.length > playerCount) {
             setPlayerCount(players.length);
-            joiningSound();
+            joiningSound(enableAudio);
         }
 
 
@@ -308,20 +307,7 @@ const Game = () => {
 
 
 
-    const ansSound = () => {
-        if(enableAudio)
-            ansAudio.play();
-    }
 
-    const joiningSound = () => {
-        if(enableAudio)
-            joinAudio.play();
-    }
-
-    const disconnectSound = () => {
-        if(enableAudio)
-            disconnectAudio.play();
-    }
 
 
     const toggleAudio = () =>{

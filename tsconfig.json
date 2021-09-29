@@ -22,7 +22,6 @@
   },
   "enabledTransports": ["ws", "wss"],
   "include": [
-    "src",
-    "src/*"
+    "src"
   ]
 }

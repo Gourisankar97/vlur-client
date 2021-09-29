@@ -68,13 +68,7 @@ const GameCard =  () => {
         isAdmin:false
     }]);
 
-    /*
-     * Sound effects
-     */
     
-
-
-
     const createRoom =  async () => {
         try {
 

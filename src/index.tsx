@@ -8,15 +8,17 @@ import { players, roomLink, page, user, messageList, game, round, currentAnswer,
 import { Provider } from 'react-redux';
 
 
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-  }
-}
+// declare global {
+//   interface Window {
+//     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+//   }
+// }
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const allReducers = combineReducers({page:page, roomLink:roomLink, user:user, players:players, messageList: messageList, game: game, round: round, currentAnswer: currentAnswer, skipTime: skipTime});
-let store = createStore(allReducers,composeEnhancers());
+// let store = createStore(allReducers,composeEnhancers());
+let store = createStore(allReducers);
+
 store.subscribe(()=>{console.log(store.getState())});
 
 ReactDOM.render(
