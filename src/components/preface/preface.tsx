@@ -59,10 +59,10 @@ const Preface =  (props: any) => {
 
             <div style={{position:'fixed', bottom:'10px'}}>
                 <Grid>
-                    <GridItem span={5}>  </GridItem>
-                    <GridItem span={1} className={"con-abt"} onClick={()=>handleContactToggle(true)}> Contact </GridItem>
-                    <GridItem span={1} className={"con-abt"} onClick={()=>handleAboutToggle(true)}> About us</GridItem>
-                    <GridItem span={5}>  </GridItem>
+                    <GridItem span={4}>  </GridItem>
+                    <GridItem span={2} className={"con-abt"} onClick={()=>handleContactToggle(true)}> Contact </GridItem>
+                    <GridItem span={2} className={"con-abt"} onClick={()=>handleAboutToggle(true)}> About us</GridItem>
+                    <GridItem span={4}>  </GridItem>
                 </Grid>
             </div>
         </>)
