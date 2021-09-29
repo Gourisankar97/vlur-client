@@ -6,6 +6,7 @@ import { Loading } from './components/loading/loading';
 import Logo from './components/preface/logo/Logo';
 import Preface from './components/preface/preface'
 import { Room } from './components/Room/room';
+import {Helmet} from 'react-helmet'
 
 
 function App() {
@@ -40,6 +41,11 @@ function App() {
 
   return (
     <div className="App">
+        <Helmet>
+          <title>vlur.online : Free Multiplayer fun Image Guessing game</title>
+          <meta name="description" content="vlur online is a free multiplayer image guessing game. Invite friends or join random rooms and Guess the image name with your friends and people all around the world!" />
+          <meta name="keywords" content="vlur online, vlur.online, image guessing game, game, multiplayer, guessing, play with friends,  game for kids, kids play"/>
+        </Helmet>
         <Logo></Logo>
        { page==='PREFACE' ?  ( <Preface></Preface> ) : '' }
         { page==='ROOM' ? ( <Room></Room> ) : '' }

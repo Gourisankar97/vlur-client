@@ -18,8 +18,6 @@ const socket = io(serviceUrl, {
 });
 
 
-
-
 const Game = () => {
 
     const [toggleBlur, setBlur] = useState(true);
@@ -349,9 +347,9 @@ const Game = () => {
                     <div id="chat-window" className="chat-box">
 
                         {messageList.map((data:any, i:number)=>
-                            <div className={i%2===0 ? 'msg-card blue' : 'msg-card white'}>
+                            <div id={data.message+"#"+i} className={i%2===0 ? 'msg-card blue' : 'msg-card white'}>
                                 <b>{data.from}:</b> 
-                                <span className={data.message === ans ? 'right-ans' : ''}>
+                                <span  id={data.message+"$"+i} className={data.message === ans ? 'right-ans' : ''}>
                                     {data.message === ans?'guessed it right':data.message}
                                 </span>
                             </div>
@@ -408,7 +406,7 @@ const Game = () => {
                     </Grid>
                 <Grid>
                     <GridItem span={12}>
-                        {players.map((data: any, rank: number)=><div>
+                        {players.map((data: any, rank: number)=><div id={data.playerId+"#"}>
 
                                 <div className={rank%2===0 ? "player-card-even" : "player-card-odd"}>
                                 <span className="player-name">
