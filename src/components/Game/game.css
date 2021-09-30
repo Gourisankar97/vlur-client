@@ -1,13 +1,13 @@
 .side-panel-left {
-    background-color: aqua;
+    background-color: rgb(202, 255, 255);
     border: black 1px solid;
-    height: 1000px;
+    height: 800px;
     margin-left: 40%;
 }
 .side-panel-right {
-    background-color: aqua;
+    background-color: rgb(200, 255, 255);
     border: black 1px solid;
-    height: 1000px;
+    height: 800px;
     margin-right: 40%;
 }
 
@@ -90,7 +90,10 @@
 
 .round-card {
     height: 30px;
-    width: 100px;
+
+    padding-left: 5px;
+    padding-right: 5px;
+    width: fit-content;
     background-color: rgb(207, 207, 207);
     border: darkblue 3px solid;
     line-height: 30px;
@@ -214,24 +217,52 @@
 }
 
 
+.badge {
+    width: 30px;
+}
+
+.pf-c-tooltip {
+
+    --pf-c-tooltip__content--BackgroundColor: #ececec;
+    --pf-c-tooltip__content--Color: rgb(10, 10, 10);
+    --pf-c-tooltip__content--FontSize: 15px;
+
+}
+.player-name {
+    margin-left: -10%;
+    display: flex;
+    text-decoration: none;
+    list-style-type: none;
+}
+.player-name .avatar {
+    width: 50px;
+    height: 50px;
+    margin-top: -20px;
+    border-radius: 50px;
+    margin-bottom: 0px;
+}
+
+
 @media only screen and (max-width: 800px) {
+
+
     .player-card-odd {
         padding: 5%;
-        font-size: smaller;
+        font-size: 12px;
     }
     
     .player-card-even {
         padding: 5%;
-        font-size: smaller;
+        font-size: 12px;
     }
     .player-score {
-        margin-left: 40%;
+        margin-left: 10%;
         color: rgb(230, 230, 253);
-        font-size: smaller;
+        font-size: 10px;
     }
     .msg-card {
         padding: 2px;
-        font-size: smaller;
+        font-size: 10px;
     }
 
     .ans-hidden {
@@ -245,6 +276,16 @@
         margin-right: 40%;
         margin-left: 0%;
     }
+
+
+    .chat-box {
+        height: 20%;
+        background-color: azure;
+        overflow-y: scroll;
+        width: 100%;
+        padding-bottom: 30px;
+    }
+
     .side-panel-right {
        
         margin-left: 40%;
@@ -261,18 +302,21 @@
     .hint-div {
         width: 175%;
         margin-left: -40%;
+        font-size: 10px;
     }
     .round-card {
-        margin-left: 40%;
-        width: 50%;
-        font-size: smaller;
+        margin-left: 45%;
+        padding-left: 3px;
+        padding-right: 3px;
+        width: 80px;
+        font-size: 10px;
         overflow-wrap: break-word;
         height: fit-content;
     }
 
     .input-box input{
-        width: 90%;
-        font-size: smaller;
+        width: 80%;
+        font-size: 10px;
         height: 15px;
     }
 
@@ -288,6 +332,27 @@
 
     .clock-circle {
         margin-left: -40%;
+    }
+    .image-blur {
+
+        filter: blur(8px);
+    }
+
+    .sound-icon {
+        margin-left: -70%;
+    }
+    .badge {
+        width: 15px;
+    }
+    .player-name {
+        margin-left: -30%;
+    }
+    .player-name .avatar {
+        width: 30px;
+        height: 30px;
+        margin-top: -20px;
+        border-radius: 50px;
+        margin-bottom: -2px;
     }
     
 }

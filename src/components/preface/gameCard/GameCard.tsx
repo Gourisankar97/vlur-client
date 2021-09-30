@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { loading, showGame, showRoom } from '../../../store/Action/actions';
 import './game-card.css'
 import { Names } from '../../../utils/random-names'
-import { serviceUrl } from '../../../env';
+import { inProduction, serviceUrl } from '../../../env';
 import axios from 'axios';
 
 import io from 'socket.io-client';
@@ -35,7 +35,6 @@ const GameCard =  () => {
     const dispatcher = useDispatch();
 
 
-    console.log("location : "+currentUrl[currentUrl.length-1]);
     const ROOMID = currentUrl[currentUrl.length-1];
 
     const checkIfRoomIsThere = async (roomId: string) => {
@@ -177,7 +176,7 @@ const GameCard =  () => {
             });
           
             socket.on("message", function(data) {
-              console.log("MESSAGE FROM WEBSOCKET : "+data.msg );
+              if(!inProduction) console.log("MESSAGE FROM WEBSOCKET : "+data.msg );
             });
 
             socket.on("join-room", async function(data) {
@@ -362,7 +361,7 @@ const GameCard =  () => {
                                             dispatcher(loading());
                                             await createRoom();
                                             await wait();
-                                            console.log("ROOMID : "+roomId);
+                                            if(!inProduction) console.log("ROOMID : "+roomId);
                                             dispatcher({type:'roomId', payload:roomId});
                                             dispatcher({type:'SET_USER', name:user.name, playerId:user.playerId, score:user.score==null?0:user.score, avatar: avatar, isAdmin: user.isAdmin});
                                             

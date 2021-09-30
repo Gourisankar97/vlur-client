@@ -1,5 +1,6 @@
-import { Grid, GridItem } from "@patternfly/react-core";
+import { Grid, GridItem, Tooltip } from "@patternfly/react-core";
 import './game.css'
+import React from 'react';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import io from 'socket.io-client';
@@ -9,10 +10,9 @@ import third from '../../assets/images/third.png';
 import sound from '../../assets/images/sound.png';
 import mute from '../../assets/images/mute.png'
 import { serviceUrl, inProduction, clientUrl } from "../../env";
-import { UserPlusIcon } from "@patternfly/react-icons";
+import { OutlinedQuestionCircleIcon, UserPlusIcon } from "@patternfly/react-icons";
 import HashMap from 'hashmap';
 import { ansSound, disconnectSound, joiningSound } from "./gmaeSound";
-import { Helmet } from "react-helmet";
 
 
 const socket = io(serviceUrl, {
@@ -117,10 +117,52 @@ const Game = () => {
             setMessageList(messageList);
             
             
-      }, [chats])
+      }, [chats]);
 
 
-      useEffect(()=> {
+      const processTotalAnswers = async () => {
+        var pMap = new HashMap<string, number>();
+        await playersBackup.map(  async (player: any)=>{
+            pMap.set(player.playerId, player.score);
+        });
+        
+
+        await players.map( async (player: any) => {
+
+            if(player.isAdmin && player.playerId === user.playerId) {
+                await dispatcher({type:'SET_USER', name: user.name, playerId: user.playerId, score: player.score, avatar:  user.avatar, isAdmin: true});
+            }
+            if(pMap.has(player.playerId)) {
+                
+                
+                
+                
+                let oldScore = pMap.get(player.playerId);
+                if(oldScore !== undefined && oldScore < player.score)
+                {   
+                    setTotalPlayerAnswered( (state)=> {
+                        return 1+state;
+                    });
+                }
+            }
+        });
+
+
+
+        await setTotalPlayerAnswered( (state)=> {
+            if(state === players.length) {
+                skipRound = true;
+                setSkipRound(skipRound);
+            }
+            return state;
+        });
+
+        await setPlayersBackup(players);
+      }
+
+
+      useEffect( ()=> {
+
 
         if(players.length < playerCount) {
             setPlayerCount(players.length);
@@ -130,43 +172,8 @@ const Game = () => {
             setPlayerCount(players.length);
             joiningSound(enableAudio);
         }
-
-
-        var pMap = new HashMap<string, number>();
-        playersBackup.map(  async (player: any)=>{
-            pMap.set(player.playerId, player.score);
-        });
         
-
-        players.map( async (player: any) => {
-
-            if(player.isAdmin && player.playerId === user.playerId) {
-                await dispatcher({type:'SET_USER', name: user.name, playerId: user.playerId, score: player.score, avatar:  user.avatar, isAdmin: true});
-            }
-            if(pMap.has(player.playerId)) {
-                
-                
-                let oldScore = pMap.get(player.playerId);
-                if(oldScore !== undefined && oldScore < player.score)
-                {
-                    setTotalPlayerAnswered( (state)=> {
-                        return state+1;
-                    });
-                }
-            }
-        });
-
-
-        
-        setTotalPlayerAnswered( (state)=> {
-            if(state === players.length) {
-                skipRound = true;
-                setSkipRound(skipRound);
-            }
-            return state;
-        });
-
-        setPlayersBackup(players);
+        processTotalAnswers();
 
       }, [players]);
 
@@ -315,23 +322,39 @@ const Game = () => {
         setEnableAudio(!enableAudio);
     }
 
-
     
     return( 
         <>
-        <Helmet>
-          <head>
-              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1497341032155334" crossOrigin="anonymous"></script>
-          </head>
-        </Helmet>
-
          <Grid>
                 <GridItem span={4}><img src={enableAudio ? sound : mute} className={"sound-icon"} onClick={()=>toggleAudio()} alt={"sound"} ></img></GridItem>
                 <GridItem span={4}></GridItem>
                 <GridItem span={4}>
-                    <div className={"round-card"}>
-                        Round {round} 
+                    <Grid>
+                        <GridItem span={10}>
+                                <div className={"round-card"}>
+                                    Round {round} / {game.length}
+                                </div>
+                        </GridItem>
+                        <GridItem span={2} style={{textAlign:'left'}}>
+                        <div style={{color:'white', marginLeft:'12px'}}>
+                        <Tooltip
+                        position="top"
+                        content={
+                            <div>1. Max 12 players in a room <br></br>
+                                 2. Each round has 3 images <br></br>
+                                 3. If any Image mismatch the <br></br> 
+                                 other players, please  <br></br> re-enter the game.
+                            </div>
+                        }
+                        >
+                        <OutlinedQuestionCircleIcon />
+                        </Tooltip>
                     </div>
+
+                        </GridItem>
+                    </Grid>
+                    
+
                 </GridItem>
             </Grid>
         <Grid>
@@ -363,7 +386,7 @@ const Game = () => {
                         Round &nbsp; {shutterRound}
                     </div> : ''}
 
-                {gameFinished ? <div className={"play-again"}> <a className={'play-again-btn'} href={"http://localhost:3000/"} >Play again!</a>  </div> 
+                {gameFinished ? <div className={"play-again"}> <a className={'play-again-btn'} href={clientUrl} >Play again!</a>  </div> 
                 : <div>
                 
                 <div className={"main-screen"} >
@@ -402,12 +425,13 @@ const Game = () => {
                         {players.map((data: any, rank: number)=><div id={data.playerId+"#"}>
 
                                 <div className={rank%2===0 ? "player-card-even" : "player-card-odd"}>
-                                <span className="player-name">
-                                    {rank===0 && data.score > 0 ? <img src={first} style={{width:'30px'}} alt={"rank1"} ></img> 
-                                    : rank===1 && data.score > 0 ?  <img src={second} style={{width:'30px'}} alt={"rank2"}></img> 
-                                    : rank===2 && data.score > 0? <img src={third} style={{width:'30px'}} alt={"rank3"}></img> 
-                                    : rank+1} &nbsp;  <img style={{width:'20px', height:'20px', borderRadius:'10px' }} src={data.avatar} alt={"icon"}></img>
-                                    &nbsp;  {data.name} {user.playerId === data.playerId ? '(You)':''} </span>
+                                <ul className="player-name">
+                                    <li>
+                                    {rank===0 && data.score > 0 ? <img src={first} className={"badge"} alt={"rank1"} ></img> 
+                                    : rank===1 && data.score > 0 ?  <img src={second} className={"badge"} alt={"rank2"}></img> 
+                                    : rank===2 && data.score > 0? <img src={third} className={"badge"} alt={"rank3"}></img> 
+                                    : rank+1} </li>  <li> &nbsp;  <img className={"avatar"} src={data.avatar} alt={"icon"}></img></li>
+                                    <li> &nbsp;  {data.name} {user.playerId === data.playerId ? '(You)':''} </li> </ul>
                                     <div>
                                         <span className="player-score">score: {data.score}</span>
                                     </div>

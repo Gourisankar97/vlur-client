@@ -22,11 +22,6 @@ const Preface =  (props: any) => {
 
     return(
         <>
-            <Helmet>
-            <head>
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1497341032155334" crossOrigin="anonymous"></script>
-            </head>
-            </Helmet>
             <GameCard></GameCard>
 
         <div className={"modal"}>

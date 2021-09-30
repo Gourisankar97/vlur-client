@@ -3,9 +3,8 @@ import './room.css';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import io from 'socket.io-client';
-import { clientUrl, serviceUrl } from "../../env";
+import { clientUrl, inProduction, serviceUrl } from "../../env";
 import { CopyIcon } from "@patternfly/react-icons";
-import { Helmet } from "react-helmet";
 
 const socket = io(serviceUrl, {
     upgrade: false, transports: ['websocket']
@@ -31,7 +30,7 @@ export const Room = () => {
     }
 
     const handleRounds = (event: any) => {
-            console.log("SELECTED : "+event.target.value);
+            if(!inProduction) console.log("SELECTED : "+event.target.value);
             setRounds(event.target.value);
     }
     
@@ -47,12 +46,6 @@ export const Room = () => {
 
     return(
         <>
-          <Helmet>
-          <head>
-              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1497341032155334" crossOrigin="anonymous"></script>
-          </head>
-        </Helmet>
-        
             <Grid>
 
                 <GridItem span={2}></GridItem>
@@ -74,13 +67,12 @@ export const Room = () => {
                     </Grid>
                     
                     <div className="players-card">
-                        {players.map((player:any) => (<div id={player.playerId}  className={"player-template"}> <div 
-                                    id={player.playerId+"-inner"} 
-                                    style={{backgroundImage:"url("+player.avatar+")",
-                                            backgroundPosition: 'center',
-                                            backgroundSize: 'cover',
-                                            backgroundRepeat: 'no-repeat'}} 
-                                            className={"player-avatar"}> </div> <div className={"player-name"} id={player.playerId+"-inner"+player.name}  >@{player.name}{player.playerId===user.playerId? '(you)':''}</div></div>))}
+                        {players.map((player:any) => (<div id={player.playerId}  className={"player-template"}> 
+                                            <object data={player.avatar} type="image/png" className={"player-avatar"}>
+                                                <img src={player.avatar} className={"player-avatar"}  alt={player.name}></img>
+                                            </object>
+
+                                            <div className={"player-name"} id={player.playerId+"-inner"+player.name}  >@{player.name}{player.playerId===user.playerId? '(you)':''}</div></div>))}
                     </div>
                     <Grid>
                         <GridItem span={7}>

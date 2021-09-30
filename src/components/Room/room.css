@@ -142,12 +142,13 @@
     background-color: rgb(235, 140, 17);
     border-radius: 100px;
     line-height: 100px;
-    opacity: 100%;
+    display: block;
 }
 
 .player-name {
     color: rgb(250, 249, 211);
     font-weight: bold;
+    font-size: medium;
 }
 
 .rounds select{
@@ -157,6 +158,18 @@
 @media only screen and (max-width: 800px) {
     .invite-link {
         font-size: 0.8rem;
+    }
+    .player-name {
+        color: rgb(250, 249, 211);
+        font-weight: bold;
+        font-size: 10px;
+    }
+    .player-avatar {
+        height: 50px;
+        width: 50px;
+        background-color: rgb(235, 140, 17);
+        border-radius: 100px;
+        margin-left: 10px;
     }
     
 }
