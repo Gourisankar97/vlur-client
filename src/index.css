@@ -6,9 +6,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: 0px;
-  background-attachment: fixed;
-  background-size:200px;
-  background-image: url('./assets/images/bg.png');
+  background: rgb(0,212,255);
+  background: linear-gradient(90deg, rgba(0,212,255,1) 0%, rgba(2,2,5,1) 0%, rgba(33,29,200,1) 48%, rgba(0,11,36,1) 100%, rgba(57,9,121,1) 100%);
 }
 
 code {

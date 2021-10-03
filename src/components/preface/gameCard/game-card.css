@@ -41,7 +41,7 @@
 .btn-play {
     width: 98%;
     height: 40px;
-    background-color: rgb(64, 187, 85);
+    background-color: rgb(93, 204, 59);
     border-radius: 7px;
     padding: 5px;
     color: rgb(248, 255, 248);
@@ -72,11 +72,15 @@
 .dropbtn {
     background-color: #4CAF50;
     color: white;
-    padding: 2%;
-    width: 100px;
+    padding: 10px;
     font-size: 16px;
     border: none;
     cursor: pointer;
+    width: fit-content;
+    font-size: 15px;
+    height: 50px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 .dropbtn:hover {
     background-color: #2da731;
@@ -99,9 +103,15 @@
 
 .dropdown-content div {
     color: black;
-    padding: 12px 16px;
+    padding: 5px 5px;
     text-decoration: none;
     display: block;
+}
+
+.dropdown-content .avatar-icons {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }
 
 .dropdown-content div:hover {
@@ -124,11 +134,26 @@
         padding: 5px;
     }
 
+    .card .name-input {
+        width: 96%;
+        margin-left: 1%;
+        border-radius: 2px;
+    }
+
     .btn-play {
         width: 96.5%;
     }
     .btn-room {
         width: 96.5%;
+    }
+    .dropbtn {
+        width: fit-content;
+        font-size: 15px;
+        height: 50px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        padding-left: 2px;
+        padding-right: 2px;
     }
 
 }

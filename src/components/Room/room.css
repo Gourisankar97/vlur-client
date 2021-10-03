@@ -1,8 +1,6 @@
 .players-card {
     height: 300px;
     width: 98%;
-    /* background-color: blue; */
-    /* opacity: 30%; */
     border: solid rgb(92, 92, 255) 1px;
     border-radius: 5px;
     display: flex;
@@ -139,7 +137,7 @@
 .player-avatar {
     height: 80px;
     width: 80px;
-    background-color: rgb(235, 140, 17);
+    background-color: rgb(10, 18, 90);
     border-radius: 100px;
     line-height: 100px;
     display: block;
@@ -147,7 +145,7 @@
 
 .player-name {
     color: rgb(250, 249, 211);
-    font-weight: bold;
+    font-weight: 500;
     font-size: medium;
 }
 
@@ -157,19 +155,40 @@
 
 @media only screen and (max-width: 800px) {
     .invite-link {
-        font-size: 0.8rem;
+        font-size: 0.6rem;
     }
     .player-name {
-        color: rgb(250, 249, 211);
         font-weight: bold;
         font-size: 10px;
+        text-align: center;
     }
     .player-avatar {
         height: 50px;
         width: 50px;
-        background-color: rgb(235, 140, 17);
+        background-color: rgb(17, 104, 235);
         border-radius: 100px;
         margin-left: 10px;
+        text-align: center;
     }
-    
+
+    .copy {
+        font-size: 0.6rem;
+    }
+
+    .stngs-str {
+        font-size: 1rem;
+    }
+
+    .public-opening {
+        font-size: 0.7rem;
+    }
+
+    .btn-start {
+        margin-top: 100px;
+        height: 25%;
+        width: 80%;
+        font-size: 0.9rem;
+    }
+
+
 }

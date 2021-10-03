@@ -4,13 +4,10 @@ import React from 'react';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import io from 'socket.io-client';
-import first from '../../assets/images/first.png';
-import second from '../../assets/images/second.png';
-import third from '../../assets/images/third.png';
 import sound from '../../assets/images/sound.png';
 import mute from '../../assets/images/mute.png'
 import { serviceUrl, inProduction, clientUrl } from "../../env";
-import { OutlinedQuestionCircleIcon, UserPlusIcon } from "@patternfly/react-icons";
+import { OutlinedLightbulbIcon, OutlinedQuestionCircleIcon, UserPlusIcon } from "@patternfly/react-icons";
 import HashMap from 'hashmap';
 import { ansSound, disconnectSound, joiningSound } from "./gmaeSound";
 
@@ -112,9 +109,8 @@ const Game = () => {
       },[]);
 
       useEffect(()=>{
-            messageList = chats;
-            if(messageList && messageList[messageList.length-1] && messageList[messageList.length-1].message === ans)  ansSound(enableAudio);
-            setMessageList(messageList);
+            if(chats && chats.length && chats[chats.length-1].message === ans)  ansSound(enableAudio);
+            if(chats.length) setMessageList( prevState => prevState.concat(chats[chats.length-1]));
             
             
       }, [chats]);
@@ -133,10 +129,6 @@ const Game = () => {
                 await dispatcher({type:'SET_USER', name: user.name, playerId: user.playerId, score: player.score, avatar:  user.avatar, isAdmin: true});
             }
             if(pMap.has(player.playerId)) {
-                
-                
-                
-                
                 let oldScore = pMap.get(player.playerId);
                 if(oldScore !== undefined && oldScore < player.score)
                 {   
@@ -228,8 +220,6 @@ const Game = () => {
             if(currentRound)
                 for(let i = currentRound.sup; i<=length; i++) {
                     let r = game[i-1];
-                    setTime(TIME);
-
                     for(let j = currentRound_sub; j<= r.length; j++) {
                         setBlur(true);
                         setAnsGiven(false);
@@ -243,6 +233,7 @@ const Game = () => {
                         setRound(i+'.'+j);
                         setShutterRound(i);
                         setCurrentPic(r[j-1].link);
+                        setTime(60);
                         setAns(r[j-1].name);
                         setHint(r[j-1].hint);
                         if(j === 1 && skipTime === 0) {
@@ -409,7 +400,7 @@ const Game = () => {
                 <br></br>
 
                 <div className={"hint-div"}>
-                <i className="icon-lightbulb"></i> Hint: {hint}
+                <OutlinedLightbulbIcon></OutlinedLightbulbIcon> Hint: {hint}
                 </div>
                 </div>}
             
@@ -425,16 +416,17 @@ const Game = () => {
                         {players.map((data: any, rank: number)=><div id={data.playerId+"#"}>
 
                                 <div className={rank%2===0 ? "player-card-even" : "player-card-odd"}>
-                                <ul className="player-name">
-                                    <li>
-                                    {rank===0 && data.score > 0 ? <img src={first} className={"badge"} alt={"rank1"} ></img> 
-                                    : rank===1 && data.score > 0 ?  <img src={second} className={"badge"} alt={"rank2"}></img> 
-                                    : rank===2 && data.score > 0? <img src={third} className={"badge"} alt={"rank3"}></img> 
-                                    : rank+1} </li>  <li> &nbsp;  <img className={"avatar"} src={data.avatar} alt={"icon"}></img></li>
-                                    <li> &nbsp;  {data.name} {user.playerId === data.playerId ? '(You)':''} </li> </ul>
-                                    <div>
-                                        <span className="player-score">score: {data.score}</span>
-                                    </div>
+                                    <table className={"table"}>
+                                        <tr>
+                                            <td rowSpan={2}><img className={"avatar"} src={data.avatar} alt={"icon"}></img></td>
+                                            <td className={'name'}>{data.name} {user.playerId === data.playerId ? '(You)':''}</td>
+                                            <td rowSpan={2} className={'rank'}>#{rank+1} </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td className={"score"}>score: {data.score}</td>
+                                        </tr>
+                                    </table>
                                 </div>
                                 
                             </div> )}

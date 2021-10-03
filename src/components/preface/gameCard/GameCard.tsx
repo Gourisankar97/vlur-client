@@ -13,22 +13,22 @@ const socket = io(serviceUrl, {
 });
 const GameCard =  () => {
 
-    const icon1  = 'https://thumbs2.imgbox.com/cc/4d/RKBiekbw_t.png';
-    const icon2  = 'https://thumbs2.imgbox.com/a5/1f/r86EVsfA_t.png';
-    const icon3  = 'https://thumbs2.imgbox.com/b7/1f/K2qkuZ3u_t.png';
-    const icon4  = 'https://thumbs2.imgbox.com/6c/38/s9wzaUsr_t.png';
+    const icon1  = 'https://i.ibb.co/SKj0Z4Z/kochikame.png';
+    const icon2  = 'https://i.ibb.co/mGgp6sC/goku-orange.png';
+    const icon3  = 'https://i.ibb.co/mS0Sskn/bignose.png';
+    const icon4  = 'https://i.ibb.co/KwPbX0C/bunny.png';
 
-    const icon5  = 'https://thumbs2.imgbox.com/26/1d/FWmNmHzy_t.png';
-    const icon6  = 'https://thumbs2.imgbox.com/5b/dd/6uQID2Eb_t.png';
-    const icon7  = 'https://thumbs2.imgbox.com/3e/7e/Q8GsOgQo_t.png';
-    const icon8  = 'https://thumbs2.imgbox.com/d8/7b/JzTPSWmj_t.png';
+    const icon5  = 'https://i.ibb.co/99B7rPV/cat.png';
+    const icon6  = 'https://i.ibb.co/Sr1Jz5k/cherry.png';
+    const icon7  = 'https://i.ibb.co/nL01hzP/doraemon.png';
+    const icon8  = 'https://i.ibb.co/8g6Wtqf/goku-power.png';
 
-    const icon9  = 'https://thumbs2.imgbox.com/88/82/0DMhNW38_t.png';
-    const icon10 = 'https://thumbs2.imgbox.com/a2/ba/DHrl75qW_t.png';
-    const icon11 = 'https://thumbs2.imgbox.com/a3/34/VDWTYA8g_t.png';
-    const icon12 = 'https://thumbs2.imgbox.com/08/8d/OcSQyOJa_t.png';
-    const icon13 = 'https://thumbs2.imgbox.com/78/92/wiEkIt39_t.png';
-    const icon14 = 'https://thumbs2.imgbox.com/6b/9b/Dz7WWiDe_t.png';
+    const icon9  = 'https://i.ibb.co/tHRRKNy/goku.png';
+    const icon10 = 'https://i.ibb.co/SdSkxxR/mario.png';
+    const icon11 = 'https://i.ibb.co/rZ60Wjk/mili.png';
+    const icon12 = 'https://i.ibb.co/r5VLSVq/naruto.png';
+    const icon13 = 'https://i.ibb.co/5hjCF18/nobita.png';
+    const icon14 = 'https://i.ibb.co/NYStCDX/pikachu.png';
 
     const wait = () => new Promise(res=>setTimeout(res,1000));
     const currentUrl = window.location.href.split("/");
@@ -279,52 +279,52 @@ const GameCard =  () => {
                                         
                                         <div className="dropdown-content">
                                             <div onClick={()=>setAvatar(icon1)}>
-                                                <img src={icon1} width="20" height="15" alt={"icon"}/>
+                                                <img src={icon1} className={"avatar-icons"} alt={"icon"}/>
                                             </div>
                             
                                             <div onClick={()=>setAvatar(icon2)}>
-                                                <img src={icon2} width="20" height="15" alt={"icon"}/>
+                                                <img src={icon2} className={"avatar-icons"} alt={"icon"}/>
                                             </div>
                                             <div onClick={()=>setAvatar(icon3)}>
-                                                <img src={icon3} width="20" height="15" alt={"icon"}/>
+                                                <img src={icon3} className={"avatar-icons"} alt={"icon"}/>
                                             </div>
                                             <div onClick={()=>setAvatar(icon4)}>
-                                                <img src={icon4} width="20" height="15" alt={"icon"}/>
+                                                <img src={icon4} className={"avatar-icons"} alt={"icon"}/>
                                             </div>
 
                                             <div onClick={()=>setAvatar(icon5)}>
-                                                <img src={icon5} width="20" height="15" alt={"icon"}/>
+                                                <img src={icon5} className={"avatar-icons"} alt={"icon"}/>
                                             </div>
                             
                                             <div onClick={()=>setAvatar(icon6)}>
-                                                <img src={icon6} width="20" height="15" alt={"icon"}/>
+                                                <img src={icon6} className={"avatar-icons"} alt={"icon"}/>
                                             </div>
                                             <div onClick={()=>setAvatar(icon7)}>
-                                                <img src={icon7} width="20" height="15" alt={"icon"}/>
+                                                <img src={icon7} className={"avatar-icons"} alt={"icon"}/>
                                             </div>
                                             <div onClick={()=>setAvatar(icon8)}>
-                                                <img src={icon8} width="20" height="15" alt={"icon"}/>
+                                                <img src={icon8} className={"avatar-icons"} alt={"icon"}/>
                                             </div>
 
                                             <div onClick={()=>setAvatar(icon9)}>
-                                                <img src={icon9} width="20" height="15" alt={"icon"}/>
+                                                <img src={icon9} className={"avatar-icons"} alt={"icon"}/>
                                             </div>
                             
                                             <div onClick={()=>setAvatar(icon10)}>
-                                                <img src={icon10} width="20" height="15" alt={"icon"}/>
+                                                <img src={icon10} className={"avatar-icons"} alt={"icon"}/>
                                             </div>
                                             <div onClick={()=>setAvatar(icon11)}>
-                                                <img src={icon11} width="20" height="15" alt={"icon"}/>
+                                                <img src={icon11} className={"avatar-icons"} alt={"icon"}/>
                                             </div>
                                             <div onClick={()=>setAvatar(icon12)}>
-                                                <img src={icon12} width="20" height="15" alt={"icon"}/>
+                                                <img src={icon12} className={"avatar-icons"} alt={"icon"}/>
                                             </div>
                                             <div onClick={()=>setAvatar(icon13)}>
-                                                <img src={icon13} width="20" height="15" alt={"icon"}/>
+                                                <img src={icon13} className={"avatar-icons"} alt={"icon"}/>
                                             </div>
                             
                                             <div onClick={()=>setAvatar(icon14)}>
-                                                <img src={icon14} width="20" height="15" alt={"icon"}/>
+                                                <img src={icon14} className={"avatar-icons"} alt={"icon"}/>
                                             </div>
 
                                         </div>
