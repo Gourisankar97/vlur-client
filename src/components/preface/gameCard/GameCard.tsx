@@ -352,7 +352,7 @@ const GameCard =  () => {
                                                 await joinRandom();
                                             }
                                             
-                                            }}>{ ROOMID.charAt(0) === '?' ? "Enter room" :"Play random"} </div>
+                                            }}>{ ROOMID.charAt(0) === '?' ? "Enter room" : "Play Quiz"} </div>
                         <div className={ "btn-room" } onClick={ async ()=>{ 
                                             if(!playerName.trim()) {
                                                 playerName = Names[Math.floor(Math.random()*Names.length)];
@@ -369,7 +369,7 @@ const GameCard =  () => {
 
                                             dispatcher(showRoom());
                                             
-                                            }}>Create room</div>
+                                            }}>Create Room</div>
 
                     </div>
                 </GridItem>

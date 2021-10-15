@@ -38,10 +38,36 @@
     box-shadow: -1px 5px 21px -8px rgba(11,142,255,0.77);
 }
 
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+
 .btn-play {
     width: 98%;
     height: 40px;
-    background-color: rgb(93, 204, 59);
+    /* background-color: rgb(93, 204, 59);
+     */
+
+    background: linear-gradient(92deg, #11e435, #009d1b, #0bf913);
+    background-size: 600% 600%;
+
+    -webkit-animation: AnimationName 7s ease infinite;
+    -moz-animation: AnimationName 7s ease infinite;
+    animation: AnimationName 7s ease infinite;
+
     border-radius: 7px;
     padding: 5px;
     color: rgb(248, 255, 248);
@@ -69,8 +95,31 @@
     background-color: rgb(6, 157, 245);
 }
 
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 54%}
+    50%{background-position:100% 47%}
+    100%{background-position:0% 54%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 54%}
+    50%{background-position:100% 47%}
+    100%{background-position:0% 54%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 54%}
+    50%{background-position:100% 47%}
+    100%{background-position:0% 54%}
+}
+
+
 .dropbtn {
-    background-color: #4CAF50;
+    background: linear-gradient(272deg, #fd5be1, #40dddf, #00d508);
+    background-size: 600% 600%;
+
+    -webkit-animation: AnimationName 4s ease infinite;
+    -moz-animation: AnimationName 4s ease infinite;
+    animation: AnimationName 4s ease infinite;
+
     color: white;
     padding: 10px;
     font-size: 16px;

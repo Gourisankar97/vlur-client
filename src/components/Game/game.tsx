@@ -67,6 +67,8 @@ const Game = () => {
     }
     
 
+    document.title = "vlur.online";
+
     const HandleSubmit = (e: any) => {
         e.preventDefault();
         let text = e.target.msg.value;
