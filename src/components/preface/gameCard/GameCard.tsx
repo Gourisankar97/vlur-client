@@ -352,7 +352,7 @@ const GameCard =  () => {
                                                 await joinRandom();
                                             }
                                             
-                                            }}>{ ROOMID.charAt(0) === '?' ? "Enter room" : "Play Quiz"} </div>
+                                            }}>{ ROOMID.charAt(0) === '?' ? "Enter room" : "Play"} </div>
                         <div className={ "btn-room" } onClick={ async ()=>{ 
                                             if(!playerName.trim()) {
                                                 playerName = Names[Math.floor(Math.random()*Names.length)];
