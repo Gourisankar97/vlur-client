@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { combineReducers, compose, createStore } from 'redux';
-import { players, roomLink, page, user, messageList, game, round, currentAnswer, skipTime} from './store/Reducer/reducers';
+import { players, roomLink, page, user, messageList, game, round, currentAnswer, skipTime, invalidRoom} from './store/Reducer/reducers';
 import { Provider } from 'react-redux';
 import { inProduction } from './env';
 
@@ -15,7 +15,7 @@ import { inProduction } from './env';
 // }
 
 // const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const allReducers = combineReducers({page:page, roomLink:roomLink, user:user, players:players, messageList: messageList, game: game, round: round, currentAnswer: currentAnswer, skipTime: skipTime});
+const allReducers = combineReducers({page:page, roomLink:roomLink, user:user, players:players, messageList: messageList, game: game, round: round, currentAnswer: currentAnswer, skipTime: skipTime, invalidRoom:invalidRoom});
 // let store = createStore(allReducers,composeEnhancers());
 let store = createStore(allReducers);
 

@@ -8,11 +8,20 @@
 .con-abt:hover {
     color: aliceblue;
     cursor: pointer;
+    
 } 
 
 .pf-c-about-modal-box {
     --pf-c-about-modal-box--BackgroundColor:#e7e7e7;
+    --pf-c-about-modal-box__close--c-button--BackgroundColor:#e7e7e7;
+    --pf-c-about-modal-box__close--c-button--Width:3rem;
+    --pf-c-about-modal-box__close--c-button--Height:3rem;
 }
+
+.pf-c-about-modal-box__close .pf-c-button.pf-m-plain:hover {
+    cursor: pointer;
+}
+
 
 
 

@@ -329,7 +329,7 @@ const Game = () => {
                                 </div>
                         </GridItem>
                         <GridItem span={2} style={{textAlign:'left'}}>
-                        <div style={{color:'white', marginLeft:'12px'}}>
+                        <div style={{color:'white', marginLeft:'5px'}}>
                         <Tooltip
                         position="top"
                         content={
@@ -402,7 +402,7 @@ const Game = () => {
                 <br></br>
 
                 <div className={"hint-div"}>
-                <OutlinedLightbulbIcon></OutlinedLightbulbIcon> Hint: {hint}
+                <OutlinedLightbulbIcon></OutlinedLightbulbIcon> Hint: { time > 40 ? 'will show after first 20 sec' : hint} 
                 </div>
                 </div>}
             

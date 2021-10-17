@@ -5,7 +5,6 @@ import { Loading } from './components/loading/loading';
 import Logo from './components/preface/logo/Logo';
 import Preface from './components/preface/preface'
 import { Room } from './components/Room/room';
-import {Helmet} from 'react-helmet'
 
 
 function App() {

@@ -323,10 +323,10 @@
     }
     .round-card {
         margin-left: 45%;
-        width: 80px;
-        padding-left: 2px;
-        padding-right: 2px;
-        font-size: 9px;
+        width: 60px;
+        padding-left: 1px;
+        padding-right: 1px;
+        font-size: 7px;
         overflow-wrap: break-word;
         height: fit-content;
     }

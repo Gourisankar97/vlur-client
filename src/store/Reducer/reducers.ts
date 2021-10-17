@@ -118,3 +118,13 @@ export const skipTime = (state:number=0, action: any) => {
 
       }
 }
+
+export const invalidRoom = (state:boolean = false, action: any) => {
+      switch (action.type) {
+            case "VALID":
+                  state = action.invalid;
+                  return state;
+            default:
+                  return state;
+      }
+}

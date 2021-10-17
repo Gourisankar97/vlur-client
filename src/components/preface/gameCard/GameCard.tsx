@@ -1,6 +1,6 @@
 import { Grid, GridItem } from '@patternfly/react-core';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loading, showGame, showRoom } from '../../../store/Action/actions';
 import './game-card.css'
 import { Names } from '../../../utils/random-names'
@@ -33,6 +33,7 @@ const GameCard =  () => {
     const wait = () => new Promise(res=>setTimeout(res,1000));
     const currentUrl = window.location.href.split("/");
     const dispatcher = useDispatch();
+    const roomInvalid = useSelector((state: any) => state.invalidRoom);
 
 
     const ROOMID = currentUrl[currentUrl.length-1];
@@ -67,6 +68,8 @@ const GameCard =  () => {
         isAdmin:false
     }]);
 
+    var [invalidRoom, setInvalidRoom] = useState(false);
+
     
     const createRoom =  async () => {
         try {
@@ -93,16 +96,31 @@ const GameCard =  () => {
 
             await axios.post(serviceUrl+'/room/'+ROOMID.substring(1), { name: playerName, avatar: avatar})
                     .then(async res => {
+                                    setInvalidRoom(prevState => false);
 
                                     user = res.data;
                                     dispatcher({type:'SET_USER', name:res.data.name, playerId:res.data.playerId, score:res.data.score==null?0:user.score, avatar: res.data.avatar, isAdmin:res.data.isAdmin});
                                     setUser(user);
                                     // await wait();
                                     })
-                    .catch((e)=>console.log(e));
+                    .catch(async (e)=>
+                    
+                    {
+                        
+                        await setInvalidRoom((prevState) => {return true});
+                        dispatcher({type:'PREFACE'});
+                        dispatcher({type:'VALID', invalid:true});
+                        console.log(e)
+                    });
 
         }
-        catch (e) {dispatcher({type:'PREFACE'});}
+        catch (e) {
+            await setInvalidRoom((prevState) => {return true});
+            dispatcher({type:'PREFACE'});
+            dispatcher({type:'VALID', invalid:true});
+            console.log(e)
+        
+        }
     }
 
     const joinRandom = async () => {
@@ -344,9 +362,15 @@ const GameCard =  () => {
 
                                                 await joinRoom();
                                                 // await wait();                      
-                                                dispatcher({type:'SET_USER', name:playerName, playerId:user.playerId, score:user.score==null?0:user.score, avatar: avatar, isAdmin: user.isAdmin});
-                                                await acknowledge();
-                                                dispatcher(showRoom());
+                                                
+                                                setInvalidRoom((state) => {
+                                                    if(!state) {
+                                                        dispatcher({type:'SET_USER', name:playerName, playerId:user.playerId, score:user.score==null?0:user.score, avatar: avatar, isAdmin: user.isAdmin});
+                                                        acknowledge();
+                                                        dispatcher(showRoom());
+                                                    }
+                                                    return state;
+                                                });
                                             }
                                             else {
                                                 await joinRandom();
@@ -372,6 +396,8 @@ const GameCard =  () => {
                                             }}>Create Room</div>
 
                     </div>
+
+                    {  roomInvalid ? <span style={{color:'rgba(255, 0,0)', fontWeight:'bold'}}>Invalid Room Id</span> : ''}
                 </GridItem>
                 <GridItem span={3}></GridItem>
             </Grid>
