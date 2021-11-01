@@ -1,13 +1,19 @@
 .logo {
     width: 400px;
-    margin-left: -50%;
+    
+}
+.blog {
+    color: rgb(210, 206, 255);
+}
+.blog:hover {
+    color: rgb(235, 233, 255);
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 800px) {
 
     .logo {
         width: 180px;
-        margin-left: -40%;
     }
     
 }

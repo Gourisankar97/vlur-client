@@ -6,7 +6,11 @@ import { combineReducers, compose, createStore } from 'redux';
 import { players, roomLink, page, user, messageList, game, round, currentAnswer, skipTime, invalidRoom} from './store/Reducer/reducers';
 import { Provider } from 'react-redux';
 import { inProduction } from './env';
-
+import Logo from './components/preface/logo/Logo';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Blog } from './blog/Blog';
+import { Article_1 } from './blog/Articles/Article_1_Image_Guessing_Quiz';
+import "@patternfly/react-core/dist/styles/base.css";
 
 // declare global {
 //   interface Window {
@@ -23,9 +27,16 @@ let store = createStore(allReducers);
 if(!inProduction) store.subscribe(()=>{console.log(store.getState())});
 
 ReactDOM.render(
+  <Router>
     <Provider store={store}>
-      <App />
-    </Provider>,
+      <Logo></Logo>
+      
+        <Route exact path="/" component={App}/>
+        <Route exact path="/blog" component={Blog} />
+        <Route path="/blog/image-guessing-quiz-game" component={Article_1} />
+      {/* <App /> */}
+    </Provider>
+  </Router>,
   document.getElementById('root')
 );
 

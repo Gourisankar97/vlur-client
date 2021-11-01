@@ -14,7 +14,6 @@ function App() {
 
   return (
     <div className="App">
-        <Logo></Logo>
        { page==='PREFACE' ?  ( <Preface></Preface> ) : '' }
         { page==='ROOM' ? ( <Room></Room> ) : '' }
         { page==='GAME' ? (<Game></Game>) : '' } 

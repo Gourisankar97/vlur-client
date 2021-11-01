@@ -1,0 +1,26 @@
+.article-card {
+    color: azure;
+    height: 100px;
+    width: 100%;
+    border: azure solid 1px;
+    line-height: 100px;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: aliceblue;
+        color: black;;
+    }
+}
+
+
+@media only screen and (max-width: 800px) {
+
+    .article-card {
+        min-height: 50px;
+        height: auto;
+        line-height: 50px;
+    }
+}

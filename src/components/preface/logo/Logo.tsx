@@ -3,16 +3,25 @@ import { useDispatch } from 'react-redux';
 import './logo.css'
 import { home } from '../../../store/Action/actions';
 import { clientUrl } from '../../../env';
+import { Grid, GridItem } from '@patternfly/react-core';
+import { Link, BrowserRouter as Router } from 'react-router-dom';
 
 const Logo = () => {
 
     const dispatcher = useDispatch();
     return(
-        <>
-            <a href={clientUrl}>
-                <img src={'logo.gif'} className={"logo"} alt={"logo"} onClick={ ()=>{dispatcher(home()) } }></img>
-            </a>
-        </>
+        <Grid>
+            <GridItem span={11}>
+                <a href={clientUrl}>
+                    <img src={'logo.gif'} className={"logo"} alt={"logo"} onClick={ ()=>{dispatcher(home()) } }></img>
+                </a>
+            </GridItem>
+            <GridItem span={1}>
+
+                    <Link to="/blog"><p className="blog">Blog</p> </Link>
+
+            </GridItem>
+        </Grid>
     )
 }
 
