@@ -13,7 +13,7 @@ const Logo = () => {
         <Grid>
             <GridItem span={11}>
                 <a href={clientUrl}>
-                    <img src={'logo.gif'} className={"logo"} alt={"logo"} onClick={ ()=>{dispatcher(home()) } }></img>
+                    <img src={'logo.gif'} className={"logo"} alt={"vlur.online"} onClick={ ()=>{dispatcher(home()) } }></img>
                 </a>
             </GridItem>
             <GridItem span={1}>

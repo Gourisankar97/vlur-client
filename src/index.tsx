@@ -7,7 +7,7 @@ import { players, roomLink, page, user, messageList, game, round, currentAnswer,
 import { Provider } from 'react-redux';
 import { inProduction } from './env';
 import Logo from './components/preface/logo/Logo';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import { Blog } from './blog/Blog';
 import { Article_1 } from './blog/Articles/Article_1_Image_Guessing_Quiz';
 import "@patternfly/react-core/dist/styles/base.css";
@@ -30,11 +30,22 @@ ReactDOM.render(
   <Router>
     <Provider store={store}>
       <Logo></Logo>
-      
-        <Route exact path="/" component={App}/>
-        <Route exact path="/blog" component={Blog} />
-        <Route path="/blog/image-guessing-quiz-game" component={Article_1} />
-      {/* <App /> */}
+      <Switch>
+        
+        
+        <Route path="/blog/image_guessing_quiz_game">
+          <Article_1/>
+        </Route>
+
+        <Route path="/blog">
+          <Blog/>
+        </Route>
+
+        <Route path="/">
+          <App/>
+        </Route>
+
+      </Switch>      
     </Provider>
   </Router>,
   document.getElementById('root')
