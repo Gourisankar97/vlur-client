@@ -27,6 +27,7 @@ let store = createStore(allReducers);
 if(!inProduction) store.subscribe(()=>{console.log(store.getState())});
 
 ReactDOM.render(
+  <main>
   <Router>
     <Provider store={store}>
       <Logo></Logo>
@@ -47,7 +48,8 @@ ReactDOM.render(
 
       </Switch>      
     </Provider>
-  </Router>,
+  </Router>
+  </main>,
   document.getElementById('root')
 );
 
