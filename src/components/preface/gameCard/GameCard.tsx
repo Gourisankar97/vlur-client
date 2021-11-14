@@ -71,87 +71,7 @@ const GameCard =  () => {
     var [invalidRoom, setInvalidRoom] = useState(false);
 
     
-    const createRoom =  async () => {
-        try {
-
-            await axios.post(serviceUrl+'/room', { name: playerName, avatar: avatar})
-                .then( async (res) => {  
-                                roomId = res.data.roomId; 
-                                setRoomId((state)=> {
-                                    return roomId;
-                                });
-                                user = res.data.players[0]; 
-                                setUser((state)=> {return user});
-                                players = res.data.players;
-                                setPlayers((state)=> {return players});
-
-                                } )
-                .catch((e)=>console.log(e));
-        }
-        catch (e) {}
-    }
-    const joinRoom = async () => {
-
-        try {
-
-            await axios.post(serviceUrl+'/room/'+ROOMID.substring(1), { name: playerName, avatar: avatar})
-                    .then(async res => {
-                                    setInvalidRoom(prevState => false);
-
-                                    user = res.data;
-                                    dispatcher({type:'SET_USER', name:res.data.name, playerId:res.data.playerId, score:res.data.score==null?0:user.score, avatar: res.data.avatar, isAdmin:res.data.isAdmin});
-                                    setUser(user);
-                                    // await wait();
-                                    })
-                    .catch(async (e)=>
-                    
-                    {
-                        
-                        await setInvalidRoom((prevState) => {return true});
-                        dispatcher({type:'PREFACE'});
-                        dispatcher({type:'VALID', invalid:true});
-                        console.log(e)
-                    });
-
-        }
-        catch (e) {
-            await setInvalidRoom((prevState) => {return true});
-            dispatcher({type:'PREFACE'});
-            dispatcher({type:'VALID', invalid:true});
-            console.log(e)
-        
-        }
-    }
-
-    const joinRandom = async () => {
-
-        try {
-
-            await axios.post(serviceUrl+'/join-random', { name: playerName, avatar: avatar})
-                    .then(async res => {
-                        let data = res.data;
-                        if(data.roomId) {
-                            roomId = data.roomId; 
-                            
-                            setRoomId(roomId);
-                            user = data.player;
-                            dispatcher({type:'roomId', payload: roomId});
-                            dispatcher({type:'SET_USER', name:data.player.name, playerId:data.player.playerId, score:0, avatar: data.player.avatar, isAdmin:data.player.isAdmin});
-                            setUser(user);
-
-                            await joinRandomEmit();
-                        }
-                        else {
-                            dispatcher({type:'PREFACE'});
-                        }
-                    })
-                    .catch(async (e)=> { 
-                        console.log(e);
-                        await dispatcher({type:'PREFACE'});
-                        });
-            }
-            catch(e) {await dispatcher({type:'PREFACE'});}
-    }
+    
 
 
 
@@ -259,7 +179,7 @@ const GameCard =  () => {
           },[]);
 
 
-        const acknowledge = async ()=> {
+          const acknowledge = async ()=> {
 
             if(ROOMID.charAt(0) === '?') {
                 socket.emit('join', {roomId: ROOMID.substring(1), playerId: user.playerId});
@@ -271,6 +191,93 @@ const GameCard =  () => {
 
         const joinRandomEmit = async () => {
             if(roomId && user) await socket.emit('join-random', {roomId: roomId, playerId: user.playerId});
+        }
+
+
+        const createRoom =  async () => {
+            try {
+    
+                await axios.post(serviceUrl+'/room', { name: playerName, avatar: avatar})
+                    .then( async (res) => {  
+                                    roomId = res.data.roomId; 
+                                    setRoomId((state)=> {
+                                        return roomId;
+                                    });
+                                    user = res.data.players[0]; 
+                                    setUser((state)=> {return user});
+                                    players = res.data.players;
+                                    setPlayers((state)=> {return players});
+    
+                                    } )
+                    .catch((e)=>console.log(e));
+            }
+            catch (e) {}
+        }
+        const joinRoom = async () => {
+    
+            try {
+    
+                await axios.post(serviceUrl+'/room/'+ROOMID.substring(1), { name: playerName, avatar: avatar})
+                        .then(async res => {
+                                        setInvalidRoom(prevState => false);
+    
+                                        user = res.data;
+                                        dispatcher({type:'SET_USER', name:res.data.name, playerId:res.data.playerId, score:res.data.score==null?0:user.score, avatar: res.data.avatar, isAdmin:res.data.isAdmin});
+                                        setUser(user);
+                                        // await wait();
+                                        console.log("USERS : "+user);
+                                        acknowledge();
+                                        dispatcher(showRoom());
+                                        
+                                        })
+                        .catch(async (e)=>
+                        
+                        {
+                            
+                            await setInvalidRoom((prevState) => {return true});
+                            dispatcher({type:'PREFACE'});
+                            dispatcher({type:'VALID', invalid:true});
+                            console.log(e)
+                        });
+    
+            }
+            catch (e) {
+                await setInvalidRoom((prevState) => {return true});
+                dispatcher({type:'PREFACE'});
+                dispatcher({type:'VALID', invalid:true});
+                console.log(e)
+            
+            }
+        }
+    
+        const joinRandom = async () => {
+    
+            try {
+    
+                await axios.post(serviceUrl+'/join-random', { name: playerName, avatar: avatar})
+                        .then(async res => {
+                            let data = res.data;
+                            if(data.roomId) {
+                                roomId = data.roomId; 
+                                
+                                setRoomId(roomId);
+                                user = data.player;
+                                dispatcher({type:'roomId', payload: roomId});
+                                dispatcher({type:'SET_USER', name:data.player.name, playerId:data.player.playerId, score:0, avatar: data.player.avatar, isAdmin:data.player.isAdmin});
+                                setUser(user);
+    
+                                await joinRandomEmit();
+                            }
+                            else {
+                                dispatcher({type:'PREFACE'});
+                            }
+                        })
+                        .catch(async (e)=> { 
+                            console.log(e);
+                            await dispatcher({type:'PREFACE'});
+                            });
+                }
+                catch(e) {await dispatcher({type:'PREFACE'});}
         }
 
 
@@ -365,12 +372,16 @@ const GameCard =  () => {
                                                 
                                                 setInvalidRoom((state) => {
                                                     if(!state) {
+                                                        console.log("SETTING USERS");
+                                                        
                                                         dispatcher({type:'SET_USER', name:playerName, playerId:user.playerId, score:user.score==null?0:user.score, avatar: avatar, isAdmin: user.isAdmin});
                                                         acknowledge();
                                                         dispatcher(showRoom());
                                                     }
                                                     return state;
                                                 });
+                                                // dispatcher(showRoom());
+
                                             }
                                             else {
                                                 await joinRandom();

@@ -15,7 +15,7 @@
 
 .input-box input{
     width: 90%;
-    height: 20px;
+    height: 2rem;
 }
 
 .input-box input:focus {
@@ -46,18 +46,18 @@
 
 .player-card-odd {
     border-bottom: cadetblue 1px solid;
-    padding: 5%;
+    padding: 1%;
     background-color: rgb(28, 22, 44);
-    width: 90%;
+    width: 100%;
     text-align: left;
     font-size: 100%;
 }
 
 .player-card-even {
     border-bottom: cadetblue 1px solid;
-    padding: 5%;
+    padding: 1%;
     background-color: rgb(49, 49, 59);
-    width: 90%;
+    width: 100%;
     text-align: left;
     font-size: 100%;
 }
@@ -66,6 +66,7 @@
     color: rgb(230, 230, 253);
     font-size: 12px;
     font-weight: bold;
+    padding-left: 1rem;
 }
 
 .score-card {
@@ -91,8 +92,7 @@
 }
 
 .round-card {
-    height: 30px;
-
+    height: 2rem;
     padding-left: 5px;
     padding-right: 5px;
     width: fit-content;
@@ -105,8 +105,8 @@
 
 
 .clock-circle {
-    width: 35px;
-    height: 30px;
+    width: 55px;
+    height: 50px;
     padding: 7px;
     background: url('../../assets/images/clock.png');
     display: block;
@@ -116,11 +116,12 @@
 .space {
     margin-top: 8%;
     margin-left: 8%;
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
     border-radius: 40px;
     background-color: rgb(255, 255, 251);
     font-size: 17px;
+    line-height: 35px;
 }
 
 .ans-div {
@@ -133,7 +134,7 @@
     color: rgb(198, 206, 245);
     padding: 2px;
     font-weight: bold;
-    height: 20px;
+    height: 2rem;
     margin: 0.5px;
     width: 5%;
     background-color: rgb(3, 1, 12);
@@ -228,14 +229,12 @@
 .player-card-even .avatar {
     width: 50px;
     height: 50px;
-
     border-radius: 50px;
     margin-bottom: 0px;
 }
 .player-card-odd .avatar {
     width: 50px;
     height: 50px;
-    margin-top: -20px;
     border-radius: 50px;
     margin-bottom: 0px;
 }
@@ -252,6 +251,11 @@
 .table .name {
     width: 200px;
     font-weight: bolder;
+    padding-left: 1rem;
+}
+
+.table .score {
+    padding-left: 1rem;
 }
 
 .table .rank {
@@ -259,6 +263,9 @@
     font-weight: bolder;
 }
 
+.mute {
+    height: 3rem;
+}
 
 @media only screen and (max-width: 800px) {
 
@@ -296,7 +303,7 @@
 
 
     .chat-box {
-        height: 20%;
+        height: 30%;
         background-color: azure;
         overflow-y: scroll;
         width: 100%;
@@ -313,11 +320,11 @@
         margin-left: -40%;
     }
     .ans-div {
-        width: 165%;
+        width: 180%;
         margin-left: -40%;
     }
     .hint-div {
-        width: 175%;
+        width: 180%;
         margin-left: -40%;
         font-size: 10px;
     }
@@ -332,9 +339,9 @@
     }
 
     .input-box input{
-        width: 80%;
+        width: 90%;
         font-size: 10px;
-        height: 15px;
+        height: 1.5rem;
     }
 
     .each-round-hide {
@@ -360,12 +367,12 @@
     }
 
     .player-card-even .avatar {
-        width: 20px;
-        height: 20px;
+        width: 2.5rem;
+        height: 1.5rem;
     }
     .player-card-odd .avatar {
-        width: 20px;
-        height: 20px;
+        width: 2.5rem;
+        height: 1.5rem;
     }
 
     .table .name {
@@ -386,5 +393,28 @@
     .table td {
         padding-left: 2px;
        }
+
+    .clock-circle {
+        width: 38px;
+        height: 35px;
+        background: url('../../assets/images/clock.png');
+        display: block;
+        background-size: cover;
+        line-height: 30px;
+    }
+    .space {
+        margin-top: 0;
+        margin-left: 0;
+        height: 1.5rem;
+        width: 1.5rem;
+        border-radius: 40px;
+        background-color: rgb(255, 255, 251);
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    .mute {
+        height: 2rem;
+    }
     
 }

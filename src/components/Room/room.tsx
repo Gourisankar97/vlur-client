@@ -76,7 +76,7 @@ export const Room = () => {
                     </div>
                     <Grid>
                         <GridItem span={7}>
-                               <span className="stngs-str"> settings </span>
+                               <div className="stngs-str"> settings </div>
                             <div className={"settings"}>
                                 <div className={"rounds"}>Rounds:
                                     <select name="rounds" defaultValue={5} onChange={handleRounds}>

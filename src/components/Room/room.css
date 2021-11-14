@@ -1,6 +1,7 @@
 .players-card {
     height: 300px;
-    width: 98%;
+    margin-top: 1rem;
+    width: 100%;
     border: solid rgb(92, 92, 255) 1px;
     border-radius: 5px;
     display: flex;
@@ -61,7 +62,7 @@
 }
 
 .stngs-str {
-    margin-top: 20px;
+    margin-top: 1rem;
     color: white;
     margin-right: 20%;
     font-size: x-large;
@@ -69,12 +70,13 @@
     border: 1px white solid;
     border-radius: 20px;
     padding: 5px;
+    width: 90%;
 }
 
 .settings {
     margin-top: 10px;
     width: 90%;
-    height: 70%;
+    height: 8rem;
     background-color: rgb(238, 241, 255);
     text-align: left;
     padding-left: 15px;
@@ -101,7 +103,7 @@
 .btn-start {
 
     margin-top: 115px;
-    height: 25%;
+    height: 3rem;
     width: 80%;
     line-height: 40px;
     /* background-color: rgb(34, 192, 3);*/
@@ -155,14 +157,14 @@
 }
 
 .player-template {
-    height: 80;
-    width: 80px;
+    height: 80px;
+    width: 120px;
     padding: 2%;
 }
 
 .player-avatar {
-    height: 80px;
-    width: 80px;
+    height: 100px;
+    width: 100px;
     background-color: rgb(10, 18, 90);
     border-radius: 100px;
     line-height: 100px;
@@ -183,10 +185,23 @@
     .invite-link {
         font-size: 0.6rem;
     }
+
+    .player-template {
+        height: 80px;
+        width: 100px;
+        padding: 2%;
+    }
+
+    .players-card {
+        margin-top: 1rem;
+        height: 300px;
+        width: 100%;
+        
+    }
+
     .player-name {
         font-weight: bold;
         font-size: 10px;
-        text-align: center;
     }
     .player-avatar {
         height: 50px;
@@ -202,6 +217,7 @@
     }
 
     .stngs-str {
+        width: 90%;
         font-size: 1rem;
     }
 
@@ -210,8 +226,9 @@
     }
 
     .btn-start {
-        margin-top: 100px;
-        height: 25%;
+        margin-top: 7rem;
+        height: 3rem;
+        line-height: 3rem;
         width: 80%;
         font-size: 0.9rem;
     }

@@ -319,7 +319,22 @@ const Game = () => {
     return( 
         <>
          <Grid>
-                <GridItem span={4}><img src={enableAudio ? sound : mute} className={"sound-icon"} onClick={()=>toggleAudio()} alt={"sound"} ></img></GridItem>
+                <GridItem span={4}>
+                    <Grid>
+                        <GridItem span={3}>
+                            <img src={enableAudio ? sound : mute} className={'mute'} onClick={()=>toggleAudio()} alt={"sound"} ></img>
+                        </GridItem>
+                        <GridItem span={3}></GridItem>
+                        <GridItem span={6}>
+                            <div className="clock-circle">
+                                <div className="space" >
+                                    {time}
+                                </div>
+                            </div>
+                        </GridItem>
+
+                    </Grid>
+                </GridItem>
                 <GridItem span={4}></GridItem>
                 <GridItem span={4}>
                     <Grid>
@@ -384,15 +399,6 @@ const Game = () => {
                 
                 <div className={"main-screen"} >
                     <img src={currentPic} onLoad={()=>{ if(!inProduction) console.log("IMAGE LOADED") }}   className={toggleBlur ? "image-blur" : "image-clear"} alt="logo"/>
-                </div>
-                
-
-                <div>
-                    <div className="clock-circle">
-                        <div className="space" >
-                            {time}
-                        </div>
-                    </div>
                 </div>
 
                 <div className={"ans-div"}>

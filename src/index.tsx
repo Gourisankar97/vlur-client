@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import "@patternfly/react-core/dist/styles/base.css";
 import './index.css';
 import App from './App';
 import { combineReducers, compose, createStore } from 'redux';
@@ -10,7 +11,6 @@ import Logo from './components/preface/logo/Logo';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import { Blog } from './blog/Blog';
 import { Article_1 } from './blog/Articles/Article_1_Image_Guessing_Quiz';
-import "@patternfly/react-core/dist/styles/base.css";
 
 // declare global {
 //   interface Window {

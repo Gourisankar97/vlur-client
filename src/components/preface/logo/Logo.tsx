@@ -1,10 +1,8 @@
 import { useDispatch } from 'react-redux';
-// import logo from '../../../assets/images/logo.gif';
 import './logo.css'
 import { home } from '../../../store/Action/actions';
 import { clientUrl } from '../../../env';
 import { Grid, GridItem } from '@patternfly/react-core';
-import { Link, BrowserRouter as Router } from 'react-router-dom';
 
 const Logo = () => {
 
@@ -18,7 +16,7 @@ const Logo = () => {
             </GridItem>
             <GridItem span={1}>
 
-                    <Link to="/blog"><p className="blog">Blog</p> </Link>
+                    <p className="blog">Blog</p>
 
             </GridItem>
         </Grid>

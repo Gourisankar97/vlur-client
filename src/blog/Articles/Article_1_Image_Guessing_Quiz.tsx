@@ -1,10 +1,13 @@
-import { Flex, Label } from '@patternfly/react-core';
-import { ExternalLinkAltIcon } from '@patternfly/react-icons';
-import React from 'react';
+import { Flex, Label, Tooltip } from '@patternfly/react-core';
+import { CloseIcon, ExternalLinkAltIcon } from '@patternfly/react-icons';
+import React, { useState } from 'react';
 import './article.scss'
 
 
 export const Article_1 = () => {
+
+
+    const [close, setClose] = useState(false);
     const tags = ['quiz'
                 ,'guess the picture game'
                 ,'picture guessing'
@@ -33,11 +36,20 @@ export const Article_1 = () => {
     }
 document.title = 'Play friends quiz and quiz questions on VLUR.ONLINE. How To Play It?';
 
-    return (
-        <div className="template">
-
+    return (<>
+        { !close ? <div className="template">
+            <div style={{float:'right', cursor:'pointer'}} onClick={() => {setClose(true)}}> 
+                <Tooltip
+                    content={
+                        <div>
+                            Close
+                        </div>
+                    }
+                    >
+                    <CloseIcon/> 
+                </Tooltip>
+            </div>
             <div className="title">
-            
                 Play friends quiz and quiz questions on VLUR.ONLINE. How To Play It?
             </div>
 
@@ -78,6 +90,7 @@ document.title = 'Play friends quiz and quiz questions on VLUR.ONLINE. How To Pl
                 {getTags()}
             </div>
             
-        </div>
+        </div> : ''}
+        </>
     );
 }

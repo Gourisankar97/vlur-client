@@ -1,6 +1,7 @@
 import { Grid, GridItem, AboutModal, TextContent, TextList, TextListItem } from '@patternfly/react-core';
 import { useState } from 'react';
 import { Helmet } from 'react-helmet';
+import { Article_1 } from '../../blog/Articles/Article_1_Image_Guessing_Quiz';
 import GameCard from './gameCard/GameCard';
 import './preface.css'
 
@@ -109,6 +110,8 @@ const Preface =  (props: any) => {
                     <GridItem span={4} className={"con-abt"} onClick={()=>handleDisclaimerToggle(true)}> Disclaimer </GridItem>
                 </Grid>
             </div>
+            <Article_1/>
+
         </>)
 }
 

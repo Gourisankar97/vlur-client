@@ -19,8 +19,6 @@ function App() {
         { page==='ROOM' ? ( <Room></Room> ) : '' }
         { page==='GAME' ? (<Game></Game>) : '' } 
         { page==='LOADING' ? (<Loading></Loading>) : ''}
-
-        <Article_1/>
     </div>
   );
 }
